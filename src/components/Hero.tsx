@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { ShoppingBag, Store } from "lucide-react";
 import heroImage from "@/assets/hero-campus.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5">
       <div className="container mx-auto px-4 py-16 md:py-24">
@@ -23,7 +26,11 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="gap-2 h-12 px-8 bg-primary hover:bg-primary-hover shadow-lg">
+              <Button 
+                size="lg" 
+                className="gap-2 h-12 px-8 bg-primary hover:bg-primary-hover shadow-lg"
+                onClick={() => navigate("/products")}
+              >
                 <ShoppingBag className="h-5 w-5" />
                 Shop as Student
               </Button>
@@ -31,6 +38,7 @@ const Hero = () => {
                 size="lg" 
                 variant="outline" 
                 className="gap-2 h-12 px-8 border-2 hover:bg-secondary hover:text-secondary-foreground hover:border-secondary"
+                onClick={() => navigate("/vendor-dashboard")}
               >
                 <Store className="h-5 w-5" />
                 Sell as Vendor

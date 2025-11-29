@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +12,8 @@ interface CategoryCardProps {
 }
 
 const CategoryCard = ({ title, description, icon, color, items }: CategoryCardProps) => {
+  const navigate = useNavigate();
+  
   const colorClasses = {
     engineering: "from-engineering/20 to-engineering/5 border-engineering/30 hover:border-engineering/50",
     medical: "from-medical/20 to-medical/5 border-medical/30 hover:border-medical/50",
@@ -25,8 +28,18 @@ const CategoryCard = ({ title, description, icon, color, items }: CategoryCardPr
     secondhand: "bg-secondhand/10 text-secondhand",
   };
 
+  const categoryMap: Record<string, string> = {
+    Engineering: "laptop",
+    Medical: "medical",
+    General: "accessories",
+    "Second-Hand": "all",
+  };
+
   return (
-    <Card className={`group relative overflow-hidden border-2 bg-gradient-to-br ${colorClasses[color]} card-hover cursor-pointer`}>
+    <Card 
+      className={`group relative overflow-hidden border-2 bg-gradient-to-br ${colorClasses[color]} card-hover cursor-pointer`}
+      onClick={() => navigate(`/products?category=${categoryMap[title]}`)}
+    >
       <div className="p-6 space-y-4">
         {/* Icon */}
         <div className={`inline-flex h-14 w-14 items-center justify-center rounded-xl ${iconColorClasses[color]}`}>
