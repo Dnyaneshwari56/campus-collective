@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import { useNavigate } from "react-router-dom";
 import Hero from "@/components/Hero";
 import CategoryCard from "@/components/CategoryCard";
 import ProductCard from "@/components/ProductCard";
@@ -6,6 +7,8 @@ import { Cpu, Stethoscope, BookOpen, RefreshCw, TrendingUp, Award, Zap } from "l
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   const categories = [
     {
       title: "Engineering",
@@ -111,7 +114,11 @@ const Index = () => {
               Most popular items among students
             </p>
           </div>
-          <Button variant="outline" className="hidden md:flex">
+          <Button 
+            variant="outline" 
+            className="hidden md:flex"
+            onClick={() => navigate("/products")}
+          >
             View All
           </Button>
         </div>
@@ -172,6 +179,7 @@ const Index = () => {
             size="lg" 
             variant="secondary"
             className="gap-2 h-12 px-8 shadow-xl"
+            onClick={() => navigate("/vendor-dashboard")}
           >
             Become a Vendor
           </Button>

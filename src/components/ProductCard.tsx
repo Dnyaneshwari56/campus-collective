@@ -1,7 +1,9 @@
 import { Heart, ShoppingCart, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProductCardProps {
   name: string;
@@ -26,6 +28,17 @@ const ProductCard = ({
   vendor,
   condition = "new",
 }: ProductCardProps) => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toast({
+      title: "Added to cart",
+      description: name,
+    });
+  };
+
   const conditionColors = {
     new: "bg-medical/10 text-medical border-medical/20",
     "like-new": "bg-engineering/10 text-engineering border-engineering/20",
@@ -33,7 +46,10 @@ const ProductCard = ({
   };
 
   return (
-    <Card className="group overflow-hidden border card-hover">
+    <Card 
+      className="group overflow-hidden border card-hover cursor-pointer"
+      onClick={() => navigate("/product/1")}
+    >
       {/* Image */}
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
@@ -94,7 +110,10 @@ const ProductCard = ({
         </div>
 
         {/* Add to Cart */}
-        <Button className="w-full gap-2 bg-primary hover:bg-primary-hover">
+        <Button 
+          className="w-full gap-2 bg-primary hover:bg-primary-hover"
+          onClick={handleAddToCart}
+        >
           <ShoppingCart className="h-4 w-4" />
           Add to Cart
         </Button>
